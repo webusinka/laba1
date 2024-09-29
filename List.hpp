@@ -17,6 +17,7 @@ class List{
 template <typename Data>
 class List2 : public List<Data>{
     public:
+        List2(): List<Data>() {};
         ~List2() {
             while (this->head != nullptr) {           //переписать
                 Node<Data>* next = this->head->next;
