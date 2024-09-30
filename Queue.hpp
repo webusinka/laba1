@@ -54,4 +54,13 @@ class Queue {
                 this->tail = nullptr;
             }
         }
+
+        void display () {
+            Node<Data>* current = this->head;
+            while (current != nullptr) {
+                std::cout << current->data << " ";
+                current = current->next;
+            }
+            std::cout << std::endl;
+        }
 };
