@@ -9,19 +9,8 @@
 
 using namespace std;
 int main(){
-    /*List2<int> list;
-    list.push_front(1);
-    list.push_back(2);
-    std::cout << list[0] << std::endl;
 
-    Queue<int> queue;
-    queue.pop();
-    queue.push(1); 
-    queue.push(2);
-    queue.pop();
-    queue.search(2);*/
-
-    cout << "Enter one of the commands:" << endl;
+    /*cout << "Enter one of the commands:" << endl;
     cout << "\tFirst letter struct type (M, L, Q, S, H, T);" << endl;
     cout << "\tSET/PUSH/INSERT - add element;" << endl;
     cout << "\tDEL/POP - remove element;" << endl;
@@ -43,7 +32,7 @@ int main(){
                 /*string name_product; пример считывания далее
                 iss >> name_product;
 
-                add(name_product, count_product, cell, wildberries);*/
+                add(name_product, count_product, cell, wildberries);
             } else if(command == "DEL"){
                 
             } else if(command == "GET"){
@@ -114,5 +103,5 @@ int main(){
             cout << "Wrong input, sorry, but you will not pass!!!" << endl;
         } 
     }
-    return 0;
+    return 0;*/
 }

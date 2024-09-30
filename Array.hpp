@@ -33,7 +33,7 @@ class Array {
                     checklist.array = newArray;
                     checklist.capacity = newCapacity;
                 }
-                for (int i = checklist.size; i > 0; i--) {
+                for (int i = checklist.size; i > 0; i--) { 
                     checklist.array[i] = checklist.array[i - 1];
                 }
 
