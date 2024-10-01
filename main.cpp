@@ -7,25 +7,13 @@
 #include "Queue.hpp"
 #include "Stack.hpp"
 #include "HashTable.hpp"
+#include "AVL_tree.hpp"
 
 using namespace std;
 
 int main(){
-    Hash_map<int, int, 1> aboba;
 
-    aboba.insert(1, 1);
-    int val = 1239;
-    aboba.get_value(1, val);
-    std::cout << val  << std::endl;
-
-    int key = 1;
-    aboba.remove(key);
-
-    val = 2229;
-    aboba.get_value(1, val);
-    std::cout << val  << std::endl;
-
-    /*cout << "Enter one of the commands:" << endl;
+    cout << "Enter one of the commands:" << endl;
     cout << "\tFirst letter struct type (M, L, Q, S, H, T);" << endl;
     cout << "\tSET/PUSH/INSERT - add element;" << endl;
     cout << "\tDEL/POP - remove element;" << endl;
@@ -43,71 +31,68 @@ int main(){
         iss >> command;
 
         if (structType == 'M') {
-            if(command == "PUSH"){
-                /*string name_product; пример считывания далее
-                iss >> name_product;
+            if(command == "PUSH"){ //
 
-                add(name_product, count_product, cell, wildberries);
-            } else if(command == "DEL"){
+            } else if(command == "DEL"){ //
                 
-            } else if(command == "GET"){
+            } else if(command == "GET"){ //
                 
-            } else if(command == "PRINT"){
+            } else if(command == "PRINT"){ //
                 
             }
 
         } else if (structType == 'L') {
-            if(command == "PUSH"){
+            if(command == "PUSH"){ //
 
-            } else if(command == "DEL"){
+            } else if(command == "DEL"){ //
                 
-            } else if(command == "GET"){
+            } else if(command == "GET"){ //
                 
-            } else if(command == "PRINT"){
+            } else if(command == "PRINT"){ //
                 
             }
 
         } else if (structType == 'Q') {
-            if(command == "PUSH"){
+            if(command == "PUSH"){ //
 
-            } else if(command == "POP"){
+            } else if(command == "POP"){ //
                 
-            } else if(command == "GET"){
+            } else if(command == "GET"){ //
                 
-            } else if(command == "PRINT"){
+            } else if(command == "PRINT"){ //
                 
             }
 
         } else if (structType == 'S') {
-            if(command == "PUSH"){
+            if(command == "PUSH"){ //
 
-            } else if(command == "POP"){
+            } else if(command == "POP"){//
                 
-            } else if(command == "GET"){
+            } else if(command == "GET"){//
                 
-            } else if(command == "PRINT"){
+            } else if(command == "PRINT"){//
                 
             }
 
         } else if (structType == 'H ') {
-            if(command == "SET"){
+            if(command == "SET"){//
 
-            } else if(command == "DEL"){
+            } else if(command == "DEL"){//
                 
-            } else if(command == "GET"){
+            } else if(command == "GET"){//
                 
-            } else if(command == "PRINT"){
+            } else if(command == "PRINT"){//
                 
             }
 
         } else if (structType == 'T') {
-            if(command == "INSERT"){
+            if(command == "INSERT"){//
 
-            } else if(command == "DEL"){
+            } else if(command == "DEL"){//
                 
-            } else if(command == "GET"){
+            } else if(command == "GET"){//
                 
-            } else if(command == "PRINT"){
+            } else if(command == "PRINT"){//
                 
             }
 
@@ -118,5 +103,5 @@ int main(){
             cout << "Wrong input, sorry, but you will not pass!!!" << endl;
         } 
     }
-    return 0;*/
+    return 0;
 }
