@@ -5,3 +5,7 @@ Node.hpp.gch
 List.hpp.gch
 Queue.hpp.gch
 Stack.hpp.gch
+hash_node.hpp:Zone.Identifier
+hash_map.hpp:Zone.Identifier
+hash_function.hpp:Zone.Identifier
+HashTable.hpp.gch
