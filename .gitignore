@@ -9,3 +9,6 @@ hash_node.hpp:Zone.Identifier
 hash_map.hpp:Zone.Identifier
 hash_function.hpp:Zone.Identifier
 HashTable.hpp.gch
+smart_main.cpp
+Array.hpp.gch
+AVL_tree.hpp.gch

@@ -13,8 +13,6 @@ public:
             table[i] = nullptr;
         }    
     }
-
-
     ~Hash_map()
     {
         for (unsigned long i = 0; i < table_size; i++) {
