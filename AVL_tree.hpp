@@ -61,7 +61,7 @@ public:
         }
         return _node;
     }
-    void printTree(tree_node<Data>* node) {
+    void display(tree_node<Data>* node) {
         if (node == nullptr) return;
             std::cout << node->data << " ";
         printTree(node->left);

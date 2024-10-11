@@ -1,7 +1,6 @@
 #include <iostream>
 #include <string>
 #include <sstream>
-#include <map>
 #include <fstream>
 #include <sys/wait.h>
 
@@ -15,7 +14,7 @@
 
 using namespace std;
 
-map<string, Array<string>> arrays;
+Array<string> arrays;
 map<string, LinkedList<string>> linked_lists;
 map<string, DoublyList<string>> doubly_lists;
 map<string, Stack<string>> stacks;
@@ -39,54 +38,68 @@ void processQuery(const string& query) {
     // search(string value)
     // search_index(int index)
     // void display();
-    // set(int index, string value)
     if (command == "APUSH"){ // добавление элемента в конец
+        arrays.load_from_file("array.txt");
         string name, value;
         ss >> name >> value;
-        arrays[name].push_back(value);
+        arrays.push_back(value);
+        arrays.save_to_file("array.txt");
     }
     else if (command == "APUSH_FRONT"){ // добавление элемента в начало
+        arrays.load_from_file("array.txt");
         string name, value;
         ss >> name >> value;
-        arrays[name].push_front(value);
+        arrays.push_front(value);
+        arrays.save_to_file("array.txt");
     }
     else if (command == "AINSERT"){ // добавление элемента по индексу
+        arrays.load_from_file("array.txt");
         string name, value;
         int index;
         ss >> name >> index >> value;
-        arrays[name].push_in(index, value);
+        arrays.push_in(index, value);
+        arrays.save_to_file("array.txt");
     }
     else if (command == "APOP"){ // удаление элемента по индексу
+        arrays.load_from_file("array.txt");
         string name;
         int index;
         ss >> name >> index;
-        arrays[name].pop_in(index);
+        arrays.pop_in(index);
+        arrays.save_to_file("array.txt");
     }
     else if (command == "APOP_FRONT"){ // удаление элемента из начала
+        arrays.load_from_file("array.txt");
         string name;
         ss >> name;
-        arrays[name].pop_front();
+        arrays.pop_front();
+        arrays.save_to_file("array.txt");
     }
     else if (command == "APOP_BACK"){ // удаление по индексу
+        arrays.load_from_file("array.txt");
         string name;
         ss >> name;
-        arrays[name].pop_back();
+        arrays.pop_back();
+        arrays.save_to_file("array.txt");
     }
     else if (command == "AGET"){ // получение элемента по индексу - search_index
+        arrays.load_from_file("array.txt");
         string name;
         int index;
         ss >> name >> index;
-        arrays[name].search_index(index);
+        arrays.search_index(index);
+        arrays.save_to_file("array.txt");
     }
     else if (command == "ASEARCH"){ // есть ли элемент по индексу 
+        arrays.load_from_file("array.txt");
         string name, value;
         ss >> name  >> value;
-        arrays[name].search(value);
+        arrays.search(value);
+        arrays.save_to_file("array.txt");
     }
     else if (command == "APRINT"){ // вывод на экран
-        string name;
-        ss >> name;
-        arrays[name].display();
+        arrays.load_from_file("array.txt");
+        arrays.display();
     }
 
     // ----------LINKEDLIST-------
