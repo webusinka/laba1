@@ -16,7 +16,7 @@ using namespace std;
 
 Array<string> arrays;
 LinkedList<string> linked_lists;
-map<string, DoublyList<string>> doubly_lists;
+DoublyList<string> doubly_lists;
 map<string, Stack<string>> stacks;
 map<string, Queue<string>> queues;
 map<string, Hash_map<string, string, 1000>> hash_tables;
@@ -177,51 +177,61 @@ void processQuery(const string& query) {
     // pop_value(Data value) // удаление элемента по значению
     // void display();
     else if (command == "2LPUSH_HEAD"){ // добавление элемента в голову
-        string name, value;
-        ss >> name >> value;
-        doubly_lists[name].push_front(value);
+        doubly_lists.load_from_file("doubly_list.txt");
+        string value;
+        ss >> value;
+        doubly_lists.push_front(value);
+        doubly_lists.save_to_file("doubly_list.txt");
     }
     else if (command == "2LPUSH_TAIL"){ // добавление элемента в хвост
-        string name, value;
-        ss >> name >> value;
-        doubly_lists[name].push_back(value);
+        doubly_lists.load_from_file("doubly_list.txt");
+        string value;
+        ss >> value;
+        doubly_lists.push_back(value);
+        doubly_lists.save_to_file("doubly_list.txt");
     }
     else if (command == "2LINSERT"){ // добавление элемента в хвост
-        string name, value;
+        doubly_lists.load_from_file("doubly_list.txt");
+        string value;
         int index;
-        ss >> name >> index >> value;
-        doubly_lists[name].push_in(index, value);
+        ss >> index >> value;
+        doubly_lists.push_in(index, value);
+        doubly_lists.save_to_file("doubly_list.txt");
     }
     else if (command == "2LPOP_HEAD"){ // удаление элемента с головы
-        string name;
-        ss >> name;
-        doubly_lists[name].pop_forward();
+        doubly_lists.load_from_file("doubly_list.txt");
+        doubly_lists.pop_forward();
+        doubly_lists.save_to_file("doubly_list.txt");
     }
     else if (command == "2LPOP_TAIL"){ // удаление элемента с хвоста
-        string name;
-        ss >> name;
-        doubly_lists[name].pop_backward();
+        doubly_lists.load_from_file("doubly_list.txt");
+        doubly_lists.pop_backward();
+        doubly_lists.save_to_file("doubly_list.txt");
     }
     else if (command == "2LPOP"){ // удаление элемента по индексу
-        string name;
+        doubly_lists.load_from_file("doubly_list.txt");
         int index;
-        ss >> name >> index;
-        doubly_lists[name].pop(index);
+        ss >>index;
+        doubly_lists.pop(index);
+        doubly_lists.save_to_file("doubly_list.txt");
     }
     else if (command == "2LPOP_VALUE"){ // удаление элемента по значению
-        string name, value;
-        ss >> name >> value;
-        doubly_lists[name].pop_value(value);
+        doubly_lists.load_from_file("doubly_list.txt");
+        string value;
+        ss >> value;
+        doubly_lists.pop_value(value);
+        doubly_lists.save_to_file("doubly_list.txt");
     }
     else if (command == "2LSEARCH"){ // поиск элемента по значению
-        string name, value;
-        ss >> name >> value;
-        doubly_lists[name].search(value);
+        doubly_lists.load_from_file("doubly_list.txt");
+        string value;
+        ss >> value;
+        doubly_lists.search(value);
+        doubly_lists.save_to_file("doubly_list.txt");
     }
     else if (command == "2LPRINT"){ // вывод на экран
-        string name;
-        ss >> name;
-        doubly_lists[name].display();
+        doubly_lists.load_from_file("doubly_list.txt");
+        doubly_lists.display();
     }
 
     // ----------QUEUE-------
