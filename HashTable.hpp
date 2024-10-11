@@ -6,6 +6,9 @@
 template <typename Key, typename Value, unsigned long table_size,typename Hash_func = Hash_function<Key>>
 class Hash_map {
 public:
+    Hash_node<Key, Value>* table[table_size];
+    Hash_func hash;
+
     Hash_map(){
         for (int i = 0; i < table_size; i++) {
             table[i] = nullptr;
@@ -92,8 +95,51 @@ public:
             delete entry;
         }
     }
+    
+    void display() {
+        for (unsigned long i = 0; i < table_size; i++) {
+            Hash_node<Key, Value> *entry = table[i];
+            while (entry != nullptr) {
+                std::cout << "Key: " << entry->get_key() << ", Value: " << entry->get_value() << std::endl;
+                entry = entry->get_next();
+            }
+        }
+    }
 
-private:
-    Hash_node<Key, Value>* table[table_size];
-    Hash_func hash;
+    void load_from_file(const std::string &filename) {
+        std::ifstream file(filename);
+        if (!file.is_open()) {
+            std::cerr << "Failed open file" << std::endl;
+            return;
+        }
+
+        std::string line;
+        while (std::getline(file, line)) {
+            std::istringstream iss(line);
+            Key key;
+            Value value;
+            iss >> key >> value;
+            insert(key, value);
+        }
+
+        file.close();
+    }
+
+    void save_to_file(const std::string &filename) {
+        std::ofstream file(filename);
+        if (!file.is_open()) {
+            std::cerr << "Failed open file" << std::endl;
+            return;
+        }
+
+        for (unsigned long i = 0; i < table_size; i++) {
+            Hash_node<Key, Value> *entry = table[i];
+            while (entry != nullptr) {
+                file << entry->get_key() << " " << entry->get_value() << std::endl;
+                entry = entry->get_next();
+            }
+        }
+
+        file.close();
+    }
 };
