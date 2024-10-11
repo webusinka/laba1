@@ -362,5 +362,33 @@ class DoublyList {
                 current = current->next;
             }
             std::cout << std::endl;
-        };
+        }
+
+        void load_from_file(std::string filename) {
+            std::ifstream file(filename);
+            if (!file) {
+                std::cout << "File not found" << std::endl;
+                return;
+            }
+
+            std::string line;
+            while (std::getline(file, line)) {
+                push_back(line);
+            }
+        }
+
+        void save_to_file(std::string filename) {
+            std::ofstream file(filename);
+            if (!file) {
+                std::cout << "File not found" << std::endl;
+                return;
+            }
+
+            Node<Data>* current = head;
+            while (current != nullptr) {
+                file << current->data << std::endl;
+                current = current->next;
+            }
+            file.close();
+        }
 };
