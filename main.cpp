@@ -18,11 +18,11 @@ Array<string> arrays;
 LinkedList<string> linked_lists;
 DoublyList<string> doubly_lists;
 Queue<string> queues;
-map<string, Stack<string>> stacks;
+Stack<string> stacks;
 map<string, Hash_map<string, string, 1000>> hash_tables;
 map<string, AVLTree<int>> trees;
 
-// Обработка команды
+
 void processQuery(const string& query) {
     stringstream ss(query);
     string command;
@@ -267,24 +267,27 @@ void processQuery(const string& query) {
     // pop() // удаление с хвоста
     // search(value) // поиск элемента по значению
     else if (command == "SPUSH"){ // Добавление элемента
-        string name, value;
-        ss >> name >> value;
-        stacks[name].push(value);
+        stacks.load_from_file("stack.txt");
+        string value;
+        ss >> value;
+        stacks.push(value);
+        stacks.save_to_file("stack.txt");
     }
     else if (command == "SPOP"){ // удаление элемента
-        string name;
-        ss >> name;
-        stacks[name].pop();
+        stacks.load_from_file("stack.txt");
+        stacks.pop();
+        stacks.save_to_file("stack.txt");
     }
     else if (command == "SSEARCH"){ // поиск элемента
-        string name, value;
-        ss >> name >> value;
-        stacks[name].search(value);
+        stacks.load_from_file("stack.txt");
+        string value;
+        ss >> value;
+        stacks.search(value);
+        stacks.save_to_file("stack.txt");
     }
     else if (command == "SPRINT"){ //вывод на экран
-        string name;
-        ss >> name;
-        stacks[name].display();
+        stacks.load_from_file("stack.txt");
+        stacks.display();
     }
 
     // ----------HASH-TABLE-------
