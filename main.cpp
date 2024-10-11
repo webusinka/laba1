@@ -17,8 +17,8 @@ using namespace std;
 Array<string> arrays;
 LinkedList<string> linked_lists;
 DoublyList<string> doubly_lists;
+Queue<string> queues;
 map<string, Stack<string>> stacks;
-map<string, Queue<string>> queues;
 map<string, Hash_map<string, string, 1000>> hash_tables;
 map<string, AVLTree<int>> trees;
 
@@ -235,31 +235,37 @@ void processQuery(const string& query) {
     }
 
     // ----------QUEUE-------
-
-
+    // push(value) // добавление элемента
+    // pop() // удаление с головы
+    // search(value) // поиск элемента по значению
     else if (command == "QPUSH"){ // Добавление элемента
-        string name, value;
-        ss >> name >> value;
-        queues[name].push(value);
+        queues.load_from_file("queue.txt");
+        string value;
+        ss >> value;
+        queues.push(value);
+        queues.save_to_file("queue.txt");
     }
     else if (command == "QPOP"){ // удаление элемента
-        string name;
-        ss >> name;
-        queues[name].pop();
+        queues.load_from_file("queue.txt");
+        queues.pop();
+        queues.save_to_file("queue.txt");
     }
     else if (command == "QSEARCH"){ // поиск элемента
-        string name, value;
-        ss >> name >> value;
-        queues[name].search(value);
+        queues.load_from_file("queue.txt");
+        string value;
+        ss >> value;
+        queues.search(value);
+        queues.save_to_file("queue.txt");
     }
     else if (command == "QPRINT"){ //вывод на экран
-        string name;
-        ss >> name;
-        queues[name].display();
+        queues.load_from_file("queue.txt");
+        queues.display();
     }
     
     // ----------STACK-------
-
+    // push(value) // добавление элемента
+    // pop() // удаление с хвоста
+    // search(value) // поиск элемента по значению
     else if (command == "SPUSH"){ // Добавление элемента
         string name, value;
         ss >> name >> value;
