@@ -19,11 +19,11 @@ LinkedList<string> linked_lists;
 DoublyList<string> doubly_lists;
 Queue<string> queues;
 Stack<string> stacks;
-map<string, Hash_map<string, string, 1000>> hash_tables;
-map<string, AVLTree<int>> trees;
+Hash_map<string, string, 1000> hash_tables;
+AVLTree<int> trees;                         //доделать обработку и класс
 
 
-void processQuery(const string& query) {
+void process_query(const string& query) {
     stringstream ss(query);
     string command;
     ss >> command;
@@ -78,18 +78,14 @@ void processQuery(const string& query) {
         arrays.save_to_file("array.txt");
     }
     else if (command == "AGET"){ // получение элемента по индексу - search_index
-        arrays.load_from_file("array.txt");
         int index;
         ss >> index;
         arrays.search_index(index);
-        arrays.save_to_file("array.txt");
     }
     else if (command == "ASEARCH"){ // есть ли элемент по индексу 
-        arrays.load_from_file("array.txt");
         string value;
         ss >> value;
         arrays.search(value);
-        arrays.save_to_file("array.txt");
     }
     else if (command == "APRINT"){ // вывод на экран
         arrays.load_from_file("array.txt");
@@ -154,11 +150,9 @@ void processQuery(const string& query) {
         linked_lists.save_to_file("linked_list.txt");
     }
     else if (command == "LSEARCH"){ // поиск элемента по значению
-        linked_lists.load_from_file("linkedlist.txt");
         string value;
         ss >> value;
         linked_lists.search(value);
-        linked_lists.save_to_file("linkedlist.txt");
     }
     else if (command == "LPRINT"){ // вывод на экран
         linked_lists.load_from_file("linkedlist.txt");
@@ -223,11 +217,9 @@ void processQuery(const string& query) {
         doubly_lists.save_to_file("doubly_list.txt");
     }
     else if (command == "2LSEARCH"){ // поиск элемента по значению
-        doubly_lists.load_from_file("doubly_list.txt");
         string value;
         ss >> value;
         doubly_lists.search(value);
-        doubly_lists.save_to_file("doubly_list.txt");
     }
     else if (command == "2LPRINT"){ // вывод на экран
         doubly_lists.load_from_file("doubly_list.txt");
@@ -251,11 +243,9 @@ void processQuery(const string& query) {
         queues.save_to_file("queue.txt");
     }
     else if (command == "QSEARCH"){ // поиск элемента
-        queues.load_from_file("queue.txt");
         string value;
         ss >> value;
         queues.search(value);
-        queues.save_to_file("queue.txt");
     }
     else if (command == "QPRINT"){ //вывод на экран
         queues.load_from_file("queue.txt");
@@ -279,11 +269,9 @@ void processQuery(const string& query) {
         stacks.save_to_file("stack.txt");
     }
     else if (command == "SSEARCH"){ // поиск элемента
-        stacks.load_from_file("stack.txt");
         string value;
         ss >> value;
         stacks.search(value);
-        stacks.save_to_file("stack.txt");
     }
     else if (command == "SPRINT"){ //вывод на экран
         stacks.load_from_file("stack.txt");
@@ -294,21 +282,28 @@ void processQuery(const string& query) {
     // get_value(string key, string value)
     // insert(string key, string value)
     // remove(string key)
-
     else if (command == "HPUSH"){ // Добавление элемента
-        string name, key, value;
-        ss >> name >> key >> value;
-        hash_tables[name].insert(key, value);
+        hash_tables.load_from_file("hash_table.txt");
+        string key, value;
+        ss >> key >> value;
+        hash_tables.insert(key, value);
+        hash_tables.save_to_file("hash_table.txt");
     }
     else if (command == "HPOP"){ // Удаление элемента
-        string name, key;
-        ss >> name >> key;
-        hash_tables[name].remove(key);
+        hash_tables.load_from_file("hash_table.txt");
+        string key;
+        ss >> key;
+        hash_tables.remove(key);
+        hash_tables.save_to_file("hash_table.txt");
     }
     else if (command == "HGET"){ // Получение значения по ключу
-        string name, key, value;
-        ss >> name >> key >> value;
-        hash_tables[name].get_value(key, value);
+        string key, value;
+        ss >> key >> value;
+        hash_tables.get_value(key, value);
+    }
+    else if (command == "HPRINT"){ //Вывод на экран
+        hash_tables.load_from_file("hash_table.txt");
+        hash_tables.display();
     }
 
     // ----------TREE-------
@@ -317,162 +312,51 @@ void processQuery(const string& query) {
     // find(tree_node<Data>* _node, int data) // поиск узла с нужным значением
     // remove(tree_node<Data>* _node, int data) // удаление узла с нужным значением
     // printTree(tree_node<Data>* node) // вывод дерева на экран
-
     else if (command == "TROOT"){
         string name;
         int root;
         ss >> name >> root;
-        trees[name].create_root(root);
+        trees.create_root(root);
     }
     else if (command == "TINSERT"){
         string name;
         int data;
         ss >> name >> data;
-        trees[name].insert(trees[name].root, data);
+        trees.insert(trees.root, data);
     }
     else if (command == "TSEARCH"){
         string name;
         int data;
         ss >> name >> data;
-        trees[name].find(trees[name].root, data);
+        trees.find(trees.root, data);
     }
     else if (command == "TPOP"){
         string name;
         int data;
         ss >> name >> data;
-        trees[name].root = trees[name].remove(trees[name].root, data);
+        trees.root = trees.remove(trees.root, data);
     }
     else if (command == "TPRINT"){
         string name;
         ss >> name;
-        trees[name].printTree(trees[name].root);
+        trees.display(trees.root);
     }
     else {
         cout << "Неизвестная команда: " << command << endl;
     }
 }
 
-// Загрузка данных из файла
-void loadFromFile(const string& filename) {
-    ifstream file(filename);
-    if (!file) {
-        cout << "Ошибка открытия файла: " << filename << endl;
-        return;
-    }
-
-    string line;
-    while (getline(file, line)) {
-        processQuery(line);
-    }
-    file.close();
-}
-
-// Сохранение данных в файл
-template <typename T>
-void saveToFile(const string& filename) {
-    ofstream file(filename);
-    if (!file) {
-        cout << "Ошибка открытия файла: " << filename << endl;
-        return;
-    }
-
-    // Сохранение массивов
-    for (const auto& [name, array] : arrays) {
-        for (int i = 0; i < array.size; ++i) {
-            file << name << " " << array.array[i] << endl;
-        }
-    }
-
-    // Сохранение связных списков
-    for (const auto& [name, linked_list] : linked_lists) {
-        Node<string>* current = linked_list.head;
-        while (current != nullptr) {
-            file << name << " " << current->data << endl;
-            current = current->next;
-        }
-    }
-
-        // Сохранение двусвязных списков
-    for (const auto& [name, doubly_list] : doubly_lists) {
-        Node<string>* currentDoubly = doubly_list.head;
-        while (currentDoubly != nullptr) {
-            file << name << " " << currentDoubly->data << endl;
-            currentDoubly = currentDoubly->next;
-        }
-    }
-
-    // Сохранение очередей
-    for (const auto& [name, queue] : queues) {
-        Node<string>* currentQueue = queue.head;
-        while (currentQueue != nullptr) {
-            file << name << endl; // Просто указываем имя очереди, так как QPOP удаляет элемент
-            currentQueue = currentQueue->next;
-        }
-    }
-
-    // Сохранение стеков
-    for (const auto& [name, stack] : stacks) {
-        Node<string>* currentStack = stack.head;
-        while (currentStack != nullptr) {
-            file << name << " " << currentStack->data << endl;
-            currentStack = currentStack->next;
-        }
-    }
-
-    // Сохранение хэш-таблиц
-    /*for (const auto& [name, hash_table] : hash_tables) {
-        for (int i = 0; i < 1000; ++i) {
-            Hash_node<string, string>* item = hash_table.table[i];
-            while (item != nullptr) {
-                file << name << " " << item->key << " " << item->value << endl;
-                item = item->next;
-            }
-        }
-    }*/
-
-        // Сохранение деревьев
-    for (const auto& [name, tree] : trees) {
-        // TODO: реализовать сохранение дерева
-    }
-
-    file.close();
-}
-
-int main(int argc, char* argv[]) {
-    system("chcp 65001");
-    string filename;
-
-    // Обработка аргументов командной строки
-    for (int i = 1; i < argc; i++) {
-        string arg = argv[i];
-        if (arg == "--file") {
-            if (i + 1 < argc) {
-                filename = argv[++i];
-            }
-        }
-    }
-
-    // Загружаем данные из файла
-    if (!filename.empty()) {
-        loadFromFile(filename);
-    }
-
+int main() {
     // Интерактивный ввод команд
     string query;
-    cout << "Введите команды (или 'exit' для выхода):" << endl;
+    cout << "Input the command ('exit'):" << endl;
     while (true) {
-        cout << "> ";
+        cout << ">>> ";
         getline(cin, query);
         if (query == "exit") {
             break; // Выход из цикла
         }
-        processQuery(query);
+        process_query(query);
     }
-
-    // Сохраняем данные обратно в файл
-    if (!filename.empty()) {
-        saveToFile<string>(filename);
-    }
-
     return 0;
 }
