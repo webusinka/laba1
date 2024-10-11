@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "Node.hpp"
+#include "List.hpp"
 
 template <typename Data>
 class Queue {
@@ -65,5 +66,19 @@ class Queue {
                 current = current->next;
             }
             std::cout << std::endl;
+        }
+
+        void load_from_file (std::string filename) {
+            List<Data> list;
+            list.load_from_file(filename);
+            this->head = list.head;
+            this->tail = list.tail;
+        }
+
+        void save_to_file (std::string filename) {
+            List<Data> list;
+            list.head = this->head;
+            list.tail = this->tail;
+            list.save_to_file(filename);
         }
 };
