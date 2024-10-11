@@ -55,6 +55,10 @@ class Queue {
         }
 
         void display () {
+            if (this->head == nullptr) {
+                std::cout << "Queue is empty!" << std::endl;
+                return;
+            }
             Node<Data>* current = this->head;
             while (current != nullptr) {
                 std::cout << current->data << " ";
