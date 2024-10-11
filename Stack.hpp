@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "Node.hpp"
+#include "List.hpp"
 
 template <typename Data>
 class Stack {
@@ -41,4 +42,15 @@ public:
         std::cout << std::endl;
     }
 
+    void load_from_file(std::string filename) {
+        List<Data> list;
+        list.load_from_file(filename);
+        this->head = list.head;
+    }
+
+    void save_to_file(std::string filename) {
+        List<Data> list;
+        list.head = this->head;
+        list.save_to_file(filename);
+    }
 };
