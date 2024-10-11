@@ -15,7 +15,7 @@
 using namespace std;
 
 Array<string> arrays;
-map<string, LinkedList<string>> linked_lists;
+LinkedList<string> linked_lists;
 map<string, DoublyList<string>> doubly_lists;
 map<string, Stack<string>> stacks;
 map<string, Queue<string>> queues;
@@ -40,60 +40,54 @@ void processQuery(const string& query) {
     // void display();
     if (command == "APUSH"){ // добавление элемента в конец
         arrays.load_from_file("array.txt");
-        string name, value;
-        ss >> name >> value;
+        string value;
+        ss >> value;
         arrays.push_back(value);
         arrays.save_to_file("array.txt");
     }
     else if (command == "APUSH_FRONT"){ // добавление элемента в начало
         arrays.load_from_file("array.txt");
-        string name, value;
-        ss >> name >> value;
+        string value;
+        ss >> value;
         arrays.push_front(value);
         arrays.save_to_file("array.txt");
     }
     else if (command == "AINSERT"){ // добавление элемента по индексу
         arrays.load_from_file("array.txt");
-        string name, value;
+        string value;
         int index;
-        ss >> name >> index >> value;
+        ss >> index >> value;
         arrays.push_in(index, value);
         arrays.save_to_file("array.txt");
     }
     else if (command == "APOP"){ // удаление элемента по индексу
         arrays.load_from_file("array.txt");
-        string name;
         int index;
-        ss >> name >> index;
+        ss >> index;
         arrays.pop_in(index);
         arrays.save_to_file("array.txt");
     }
     else if (command == "APOP_FRONT"){ // удаление элемента из начала
         arrays.load_from_file("array.txt");
-        string name;
-        ss >> name;
         arrays.pop_front();
         arrays.save_to_file("array.txt");
     }
     else if (command == "APOP_BACK"){ // удаление по индексу
         arrays.load_from_file("array.txt");
-        string name;
-        ss >> name;
         arrays.pop_back();
         arrays.save_to_file("array.txt");
     }
     else if (command == "AGET"){ // получение элемента по индексу - search_index
         arrays.load_from_file("array.txt");
-        string name;
         int index;
-        ss >> name >> index;
+        ss >> index;
         arrays.search_index(index);
         arrays.save_to_file("array.txt");
     }
     else if (command == "ASEARCH"){ // есть ли элемент по индексу 
         arrays.load_from_file("array.txt");
-        string name, value;
-        ss >> name  >> value;
+        string value;
+        ss >> value;
         arrays.search(value);
         arrays.save_to_file("array.txt");
     }
@@ -114,51 +108,61 @@ void processQuery(const string& query) {
     // search(Data value) // поиск элемента по значению
     // void display();
     else if (command == "LPUSH_HEAD"){ // добавление элемента в голову
-        string name, value;
-        ss >> name >> value;
-        linked_lists[name].push_front(value);
+        linked_lists.load_from_file("linked_list.txt");
+        string value;
+        ss >> value;
+        linked_lists.push_front(value);
+        linked_lists.save_to_file("linked_list.txt");
     }
     else if (command == "LPUSH_TAIL"){ // добавление элемента в хвост
-        string name, value;
-        ss >> name >> value;
-        linked_lists[name].push_back(value);
+        linked_lists.load_from_file("linked_list.txt");
+        string value;
+        ss >> value;
+        linked_lists.push_back(value);
+        linked_lists.save_to_file("linked_list.txt");
     }
     else if (command == "LINSERT"){ // добавление элемента по индексу
-        string name, value;
+        linked_lists.load_from_file("linked_list.txt");
+        string value;
         int index;
-        ss >> name >> index >> value;
-        linked_lists[name].insert(index, value);
+        ss >> index >> value;
+        linked_lists.insert(index, value);
+        linked_lists.save_to_file("linked_list.txt");
     }
     else if (command == "LPOP_HEAD"){ // удаление элемента с головы
-        string name;
-        ss >> name;
-        linked_lists[name].pop_head();
+        linked_lists.load_from_file("linked_list.txt");
+        linked_lists.pop_head();
+        linked_lists.save_to_file("linked_list.txt");
     }
     else if (command == "LPOP_TAIL"){ // удаление элемента с хвоста
-        string name;
-        ss >> name;
-        linked_lists[name].pop_tail();
+        linked_lists.load_from_file("linked_list.txt");
+        linked_lists.pop_tail();
+        linked_lists.save_to_file("linked_list.txt");
     }
     else if (command == "LPOP"){ // удаление элемента с хвоста
-        string name;
+        linked_lists.load_from_file("linked_list.txt");
         int index;
-        ss >> name >> index;
-        linked_lists[name].pop(index);
+        ss >>  index;
+        linked_lists.pop(index);
+        linked_lists.save_to_file("linked_list.txt");
     }
     else if (command == "LPOP_VALUE"){ // удаление элемента по значению
-        string name, value;
-        ss >> name >> value;
-        linked_lists[name].pop_value(value);
+        linked_lists.load_from_file("linked_list.txt");
+        string value;
+        ss >> value;
+        linked_lists.pop_value(value);
+        linked_lists.save_to_file("linked_list.txt");
     }
     else if (command == "LSEARCH"){ // поиск элемента по значению
-        string name, value;
-        ss >> name >> value;
-        linked_lists[name].search(value);
+        linked_lists.load_from_file("linkedlist.txt");
+        string value;
+        ss >> value;
+        linked_lists.search(value);
+        linked_lists.save_to_file("linkedlist.txt");
     }
     else if (command == "LPRINT"){ // вывод на экран
-        string name;
-        ss >> name;
-        linked_lists[name].display();
+        linked_lists.load_from_file("linkedlist.txt");
+        linked_lists.display();
     }
 
         // ----------DOUBLYLIST-------
