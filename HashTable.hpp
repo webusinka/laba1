@@ -1,5 +1,3 @@
-#pragma once
-
 #include "hash_node.hpp"
 #include "hash_function.hpp"
 #include <cstddef>

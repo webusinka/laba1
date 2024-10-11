@@ -72,12 +72,6 @@ void processQuery(const string& query) {
         ss >> name;
         arrays[name].pop_back();
     }
-    else if (command == "AREPLACE"){ // замена элемента по индексу - set
-        string name, value;
-        int index;
-        ss >> name >> index >> value;
-        arrays[name].set(index, value);
-    }
     else if (command == "AGET"){ // получение элемента по индексу - search_index
         string name;
         int index;
@@ -390,7 +384,7 @@ void saveToFile(const string& filename) {
     }
 
     // Сохранение хэш-таблиц
-    for (const auto& [name, hash_table] : hash_tables) {
+    /*for (const auto& [name, hash_table] : hash_tables) {
         for (int i = 0; i < 1000; ++i) {
             Hash_node<string, string>* item = hash_table.table[i];
             while (item != nullptr) {
@@ -398,7 +392,7 @@ void saveToFile(const string& filename) {
                 item = item->next;
             }
         }
-    }
+    }*/
 
         // Сохранение деревьев
     for (const auto& [name, tree] : trees) {

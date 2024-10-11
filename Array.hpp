@@ -1,4 +1,3 @@
-#pragma once
 #include <iostream>
 
 template <typename Data>
@@ -129,18 +128,42 @@ public:
     }
 
     void display(){
+        if (size == 0) {
+            std::cout << "Array is empty." << std::endl;
+            return;
+        }
         for (int i = 0; i < size; i++) {
             std::cout << array[i] << " ";
         }
         std::cout << std::endl;
     }
 
-    void set(const int index, Data value){
-        if (index >= 0 && index <= size) {
-            array[index] = value;
-            std::cout << array[index] << std::endl;
-        } else {
-            std::cout << "Invalid index" << std::endl; 
+    //загрузка данных из файла
+    void load_from_file(const std::string& filename){
+        std::ifstream file(filename);
+        if (!file) {
+            std::cout << "File not found" << std::endl;
+            return;
         }
+
+        std::string line;
+        while (getline(file, line)) {
+            push_back(line); // добавляем в конец массива
+        }
+        file.close();
+    }
+
+    //сохранение данных в файл
+    void save_to_file(const std::string& filename){
+        std::ofstream file(filename);
+        if (!file) {
+            std::cout << "File not found" << std::endl;
+            return;
+        }
+
+        for (int i = 0; i < size; i++) {
+            file << array[i] << std::endl;
+        }
+        file.close();
     }
 };

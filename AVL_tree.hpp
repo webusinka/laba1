@@ -1,4 +1,3 @@
-#pragma once
 #include <iostream>
 #include "tree_node.hpp"
 
@@ -25,9 +24,9 @@ public:
     }
     tree_node<Data>* find(tree_node<Data>* _node, Data data){
         if(_node == nullptr) return nullptr;
-        if(data < _node->key)
+        if(data < _node->data)
             return find(_node->left, data);
-        else if(data > _node->key)
+        else if(data > _node->data)
             return find(_node->right, data);
         else
             return _node;
