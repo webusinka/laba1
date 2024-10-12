@@ -4,7 +4,7 @@
 
 #include "Node.hpp"
 #include "Array.hpp"
-//#include "List.hpp"
+#include "List.hpp"
 //#include "Queue.hpp"
 //#include "Stack.hpp"
 //#include "HashTable.hpp"
@@ -13,8 +13,8 @@
 using namespace std;
 
 Array<string> arrays;
-//LinkedList<string> linked_lists;
-//DoublyList<string> doubly_lists;
+LinkedList<string> linked_lists;
+DoublyList<string> doubly_lists;
 //Queue<string> queues;
 //Stack<string> stacks;
 //Hash_map<string, string, 1000> hash_tables;
@@ -100,7 +100,7 @@ void process_query(const string& query) {
     // pop_value(Data value) // удаление элемента по значению
     // search(Data value) // поиск элемента по значению
     // void display();
-    /*else if (command == "LPUSH_HEAD"){ // добавление элемента в голову
+    else if (command == "LPUSH_HEAD"){ // добавление элемента в голову
         linked_lists.load_from_file("linked_list.txt");
         string value;
         ss >> value;
@@ -152,7 +152,7 @@ void process_query(const string& query) {
         linked_lists.search(value);
     }
     else if (command == "LPRINT"){ // вывод на экран
-        linked_lists.load_from_file("linkedlist.txt");
+        linked_lists.load_from_file("linked_list.txt");
         linked_lists.display();
     }
 
@@ -227,7 +227,7 @@ void process_query(const string& query) {
     // push(value) // добавление элемента
     // pop() // удаление с головы
     // search(value) // поиск элемента по значению
-    else if (command == "QPUSH"){ // Добавление элемента
+    /*else if (command == "QPUSH"){ // Добавление элемента
         queues.load_from_file("queue.txt");
         string value;
         ss >> value;

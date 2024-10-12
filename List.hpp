@@ -172,6 +172,12 @@ class LinkedList{
         }
 
         void load_from_file(std::string filename) {
+            while (head) { // очищаем текущий лист
+                pop_head();
+            }
+            head = nullptr; // Обновляем указатели
+            tail = nullptr;
+
             std::ifstream file(filename);
             if (!file) {
                 std::cout << "File not found" << std::endl;
@@ -200,7 +206,6 @@ class LinkedList{
             file.close();
         }
 };
-
 
 
 template <typename Data>
@@ -287,23 +292,25 @@ class DoublyList {
         void pop_forward(){
             if (head == nullptr) return;
             Node<Data>* curr = head;
-            head->next->prev = nullptr;
             head = head->next;
-            delete curr;
+
             if (head == nullptr) {
-                tail = nullptr;
+                tail = nullptr; // обновляем tail, если список стал пустым
+            } else {
+                head->prev = nullptr; // обновляем prev для нового head
             }
+            delete curr;
         };
         void pop_backward(){
             if (tail == nullptr) return;
             Node<Data>* curr = tail;
-            tail->prev->next = nullptr;
             tail = tail->prev;
-            delete curr;
             if (tail == nullptr) {
-                head = nullptr;
+                head = nullptr; // обновляем head, если список стал пустым
+            } else {
+                tail->next = nullptr; // обновляем next для нового tail
             }
-
+            delete curr;
         };
         void pop(int index){
             if (index < 0) {
@@ -366,6 +373,10 @@ class DoublyList {
         }
 
         void load_from_file(std::string filename) {
+            while (head) { // очищаем текущий лист
+                pop_backward();
+            }
+
             std::ifstream file(filename);
             if (!file) {
                 std::cout << "File not found" << std::endl;
@@ -376,6 +387,7 @@ class DoublyList {
             while (std::getline(file, line)) {
                 push_back(line);
             }
+            file.close();
         }
 
         void save_to_file(std::string filename) {
