@@ -1,7 +1,6 @@
 #include <iostream>
 
 #include "Node.hpp"
-#include "List.hpp"
 
 template <typename Data>
 class Queue {
@@ -69,16 +68,33 @@ class Queue {
         }
 
         void load_from_file (std::string filename) {
-            List<Data> list;
-            list.load_from_file(filename);
-            this->head = list.head;
-            this->tail = list.tail;
+            std::ifstream file(filename);
+            if (!file) {
+                std::cout << "File not found" << std::endl;
+                return;
+            }
+
+            std::string line;
+            while (getline(file, line)) {
+                push(line); // добавляем в конец
+            }
+            file.close();
         }
 
         void save_to_file (std::string filename) {
-            List<Data> list;
-            list.head = this->head;
-            list.tail = this->tail;
-            list.save_to_file(filename);
+            std::ofstream file(filename);
+            if (!file) {
+                std::cout << "File not found" << std::endl;
+                return;
+            }
+
+            Node<Data>* current = this->head;
+            while (current != nullptr) {
+                std::cout << current->data << " ";
+                current = current->next;
+            }
+            std::cout << std::endl;
+            
+            file.close();
         }
 };
