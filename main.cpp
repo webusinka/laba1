@@ -1,26 +1,24 @@
 #include <iostream>
 #include <string>
 #include <sstream>
-#include <fstream>
-#include <sys/wait.h>
 
-#include "Array.hpp"
-#include "List.hpp"
 #include "Node.hpp"
-#include "Queue.hpp"
-#include "Stack.hpp"
-#include "HashTable.hpp"
-#include "AVL_tree.hpp"
+#include "Array.hpp"
+//#include "List.hpp"
+//#include "Queue.hpp"
+//#include "Stack.hpp"
+//#include "HashTable.hpp"
+//#include "AVL_tree.hpp"
 
 using namespace std;
 
 Array<string> arrays;
-LinkedList<string> linked_lists;
-DoublyList<string> doubly_lists;
-Queue<string> queues;
-Stack<string> stacks;
-Hash_map<string, string, 1000> hash_tables;
-AVLTree<int> trees;
+//LinkedList<string> linked_lists;
+//DoublyList<string> doubly_lists;
+//Queue<string> queues;
+//Stack<string> stacks;
+//Hash_map<string, string, 1000> hash_tables;
+//AVLTree<int> trees;
 
 void process_query(const string& query) {
     stringstream ss(query);
@@ -102,7 +100,7 @@ void process_query(const string& query) {
     // pop_value(Data value) // удаление элемента по значению
     // search(Data value) // поиск элемента по значению
     // void display();
-    else if (command == "LPUSH_HEAD"){ // добавление элемента в голову
+    /*else if (command == "LPUSH_HEAD"){ // добавление элемента в голову
         linked_lists.load_from_file("linked_list.txt");
         string value;
         ss >> value;
@@ -340,6 +338,7 @@ void process_query(const string& query) {
         trees.load_from_file("tree.txt");
         trees.display(trees.root);
     }
+    */
     else {
         cout << "Неизвестная команда " << endl;
     }
@@ -348,11 +347,11 @@ void process_query(const string& query) {
 int main() {
     // Интерактивный ввод команд
     string query;
-    cout << "Input the command ('exit'):" << endl;
+    cout << "Input the command ('EXIT'):" << endl;
     while (true) {
         cout << ">>> ";
         getline(cin, query);
-        if (query == "exit") {
+        if (query == "EXIT") {
             break; // Выход из цикла
         }
         process_query(query);

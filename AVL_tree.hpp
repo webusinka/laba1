@@ -1,4 +1,6 @@
 #include <iostream>
+#include <fstream>
+
 #include "tree_node.hpp"
 
 template <typename Data>

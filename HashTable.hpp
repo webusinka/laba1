@@ -2,6 +2,7 @@
 #include "hash_function.hpp"
 #include <cstddef>
 #include <iostream>
+#include <fstream>
 
 template <typename Key, typename Value, unsigned long table_size,typename Hash_func = Hash_function<Key>>
 class Hash_map {

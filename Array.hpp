@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 
 template <typename Data>
 class Array {
@@ -7,7 +8,9 @@ public:
     int size;       // размерность массива
     int capacity; // текущая ёмкость массива
 
-    Array() : array(nullptr), size(0), capacity(10) {}
+    Array() : array(nullptr), size(0), capacity(10) {
+        array = new Data[capacity];
+    }
 
     ~Array() {
         delete[] array;
@@ -140,8 +143,9 @@ public:
 
     //загрузка данных из файла
     void load_from_file(const std::string& filename){
+        size = 0; // очищаем массив
         std::ifstream file(filename);
-        if (!file) {
+        if (!file.is_open()) {
             std::cout << "File not found" << std::endl;
             return;
         }
@@ -155,8 +159,9 @@ public:
 
     //сохранение данных в файл
     void save_to_file(const std::string& filename){
-        std::ofstream file(filename);
-        if (!file) {
+
+        std::ofstream file(filename, std::ofstream::out | std::ios_base::trunc);
+        if (!file.is_open()) {
             std::cout << "File not found" << std::endl;
             return;
         }
