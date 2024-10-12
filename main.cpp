@@ -5,7 +5,7 @@
 #include "Node.hpp"
 #include "Array.hpp"
 #include "List.hpp"
-//#include "Queue.hpp"
+#include "Queue.hpp"
 //#include "Stack.hpp"
 //#include "HashTable.hpp"
 //#include "AVL_tree.hpp"
@@ -15,7 +15,7 @@ using namespace std;
 Array<string> arrays;
 LinkedList<string> linked_lists;
 DoublyList<string> doubly_lists;
-//Queue<string> queues;
+Queue<string> queues;
 //Stack<string> stacks;
 //Hash_map<string, string, 1000> hash_tables;
 //AVLTree<int> trees;
@@ -227,7 +227,7 @@ void process_query(const string& query) {
     // push(value) // добавление элемента
     // pop() // удаление с головы
     // search(value) // поиск элемента по значению
-    /*else if (command == "QPUSH"){ // Добавление элемента
+    else if (command == "QPUSH"){ // Добавление элемента
         queues.load_from_file("queue.txt");
         string value;
         ss >> value;
@@ -253,7 +253,7 @@ void process_query(const string& query) {
     // push(value) // добавление элемента
     // pop() // удаление с хвоста
     // search(value) // поиск элемента по значению
-    else if (command == "SPUSH"){ // Добавление элемента
+    /*else if (command == "SPUSH"){ // Добавление элемента
         stacks.load_from_file("stack.txt");
         string value;
         ss >> value;

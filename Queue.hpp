@@ -68,7 +68,13 @@ class Queue {
             std::cout << std::endl;
         }
 
-        void load_from_file (std::string filename) {
+        void load_from_file(std::string filename) {
+            while (head) { // очищаем текущий лист
+                pop();
+            }
+            head = nullptr; // Обновляем указатели
+            tail = nullptr;
+
             std::ifstream file(filename);
             if (!file) {
                 std::cout << "File not found" << std::endl;
@@ -77,25 +83,23 @@ class Queue {
 
             std::string line;
             while (getline(file, line)) {
-                push(line); // добавляем в конец
+                push(line); // добавляем в конец массива
             }
             file.close();
         }
 
-        void save_to_file (std::string filename) {
+        void save_to_file(std::string filename) {
             std::ofstream file(filename);
             if (!file) {
                 std::cout << "File not found" << std::endl;
                 return;
             }
 
-            Node<Data>* current = this->head;
+            Node<Data>* current = head;
             while (current != nullptr) {
-                std::cout << current->data << " ";
+                file << current->data << std::endl;
                 current = current->next;
             }
-            std::cout << std::endl;
-            
             file.close();
         }
 };
