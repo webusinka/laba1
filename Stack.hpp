@@ -2,7 +2,6 @@
 #include <fstream>
 
 #include "Node.hpp"
-#include "List.hpp"
 
 template <typename Data>
 class Stack {
@@ -44,14 +43,53 @@ public:
     }
 
     void load_from_file(std::string filename) {
-        List<Data> list;
-        list.load_from_file(filename);
-        this->head = list.head;
-    }
+        while (head) { // очищаем текущий лист
+            pop();
+        }
+        head = nullptr; // Обновляем указатели
 
+        std::ifstream file(filename);
+        if (!file) {
+            std::cout << "File not found" << std::endl;
+            return;
+        }
+
+        std::string line;
+        while (getline(file, line)) {
+            push(line); // добавляем в конец массива
+        }
+        file.close();
+    }
+    bool isEmpty() {
+        return head == nullptr;
+    }
+    Data top() {
+        if (head == nullptr) {
+            std::cout << "Stack is empty!" << std::endl;
+            // можно бросить исключение или вернуть значение по умолчанию
+        }
+        return head->data;
+    }
     void save_to_file(std::string filename) {
-        List<Data> list;
-        list.head = this->head;
-        list.save_to_file(filename);
+        std::ofstream file(filename);
+        if (!file) {
+            std::cout << "File not found" << std::endl;
+            return;
+        }
+
+        Node<Data>* current = head;
+        Stack<Data> tempStack;
+
+        while (current != nullptr) {
+            tempStack.push(current->data);
+            current = current->next;
+        }
+
+        while (!tempStack.isEmpty()) {
+            file << tempStack.top() << std::endl;
+            tempStack.pop();
+        }
+
+        file.close();
     }
 };
