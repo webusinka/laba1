@@ -20,8 +20,7 @@ DoublyList<string> doubly_lists;
 Queue<string> queues;
 Stack<string> stacks;
 Hash_map<string, string, 1000> hash_tables;
-AVLTree<int> trees;                         //доделать обработку и класс
-
+AVLTree<int> trees;
 
 void process_query(const string& query) {
     stringstream ss(query);
@@ -313,36 +312,36 @@ void process_query(const string& query) {
     // remove(tree_node<Data>* _node, int data) // удаление узла с нужным значением
     // printTree(tree_node<Data>* node) // вывод дерева на экран
     else if (command == "TROOT"){
-        string name;
         int root;
-        ss >> name >> root;
+        ss >> root;
         trees.create_root(root);
+        trees.save_from_file("tree.txt");
     }
     else if (command == "TINSERT"){
-        string name;
+        trees.load_from_file("tree.txt");
         int data;
-        ss >> name >> data;
+        ss >> data;
         trees.insert(trees.root, data);
+        trees.save_from_file("tree.txt");
     }
     else if (command == "TSEARCH"){
-        string name;
         int data;
-        ss >> name >> data;
+        ss >> data;
         trees.find(trees.root, data);
     }
     else if (command == "TPOP"){
-        string name;
+        trees.load_from_file("tree.txt");
         int data;
-        ss >> name >> data;
+        ss >> data;
         trees.root = trees.remove(trees.root, data);
+        trees.save_from_file("tree.txt");
     }
     else if (command == "TPRINT"){
-        string name;
-        ss >> name;
+        trees.load_from_file("tree.txt");
         trees.display(trees.root);
     }
     else {
-        cout << "Неизвестная команда: " << command << endl;
+        cout << "Неизвестная команда " << endl;
     }
 }
 

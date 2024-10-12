@@ -67,4 +67,30 @@ public:
         printTree(node->left);
         printTree(node->right);
     }
+
+    void load_from_file(std::string filename) {
+        std::ifstream file(filename);
+        if (file.is_open()) {
+            std::string line;
+            while (std::getline(file, line)) {
+                insert(line);
+            }
+            file.close();
+        }
+    }
+
+    void save_from_file(std::string filename) {
+        std::ofstream fout(filename);
+        if (fout.is_open()) {
+            save_to_file(fout, root);
+            fout.close();
+        }
+    }
+
+    void save_to_file(std::ofstream& fout, tree_node<Data>* node) {
+        if (node == nullptr) return;
+        save_to_file(fout, node->left);
+        fout << node->data << " ";
+        save_to_file(fout, node->right);
+    }
 };
