@@ -66,7 +66,6 @@ public:
     Data top() {
         if (head == nullptr) {
             std::cout << "Stack is empty!" << std::endl;
-            // можно бросить исключение или вернуть значение по умолчанию
         }
         return head->data;
     }

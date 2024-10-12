@@ -17,3 +17,5 @@ array.txt
 linked_list.txt
 queue.txt
 stack.txt
+hash_table.txt
+.gitignore

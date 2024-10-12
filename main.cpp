@@ -7,7 +7,7 @@
 #include "List.hpp"
 #include "Queue.hpp"
 #include "Stack.hpp"
-//#include "HashTable.hpp"
+#include "HashTable.hpp"
 //#include "AVL_tree.hpp"
 
 using namespace std;
@@ -17,7 +17,7 @@ LinkedList<string> linked_lists;
 DoublyList<string> doubly_lists;
 Queue<string> queues;
 Stack<string> stacks;
-//Hash_map<string, string, 1000> hash_tables;
+Hash_map<string, string, 1> hash_tables;
 //AVLTree<int> trees;
 
 void process_query(const string& query) {
@@ -279,7 +279,7 @@ void process_query(const string& query) {
     // get_value(string key, string value)
     // insert(string key, string value)
     // remove(string key)
-    /*else if (command == "HPUSH"){ // Добавление элемента
+    else if (command == "HPUSH"){ // Добавление элемента
         hash_tables.load_from_file("hash_table.txt");
         string key, value;
         ss >> key >> value;
@@ -294,9 +294,10 @@ void process_query(const string& query) {
         hash_tables.save_to_file("hash_table.txt");
     }
     else if (command == "HGET"){ // Получение значения по ключу
-        string key, value;
-        ss >> key >> value;
-        hash_tables.get_value(key, value);
+        string key;
+        ss >> key;
+        string value = hash_tables.get_value(key);
+        cout << ">>> value: " << value << endl;
     }
     else if (command == "HPRINT"){ //Вывод на экран
         hash_tables.load_from_file("hash_table.txt");
@@ -309,7 +310,7 @@ void process_query(const string& query) {
     // find(tree_node<Data>* _node, int data) // поиск узла с нужным значением
     // remove(tree_node<Data>* _node, int data) // удаление узла с нужным значением
     // printTree(tree_node<Data>* node) // вывод дерева на экран
-    else if (command == "TROOT"){
+    /*else if (command == "TROOT"){
         int root;
         ss >> root;
         trees.create_root(root);

@@ -1,6 +1,5 @@
 #include "hash_node.hpp"
 #include "hash_function.hpp"
-#include <cstddef>
 #include <iostream>
 #include <fstream>
 
@@ -28,20 +27,17 @@ public:
         }
     }
 
-    bool get_value(const Key &key, Value &value)
-    {
+    Value get_value(const Key &key) {
         unsigned long hash_value = hash(key, table_size);
         Hash_node<Key, Value>* entry = table[hash_value];
+
         while (entry != nullptr) {
             if (entry->get_key() == key) {
-                value = entry->get_value();
-                return true;
+                return entry->get_value();
             }
-
             entry = entry->get_next();
         }
-
-        return false;
+        return Value();
     }
 
     void insert(const Key &key, const Value &value)
@@ -71,15 +67,18 @@ public:
         }
     }
 
-    void remove(const Key &key)
-    {
+    void remove(const Key &key) {
         unsigned long hash_value = hash(key, table_size);
         Hash_node<Key, Value> *prev = nullptr;
         Hash_node<Key, Value> *entry = table[hash_value];
 
-        while (entry != nullptr && entry->get_key() != key) {
-            prev = entry;
-            entry = entry->get_next();
+        while (entry != nullptr) {
+            if(entry->get_key() != key){
+                prev = entry;
+                entry = entry->get_next();
+            } else {
+                break;
+            }
         }
 
         if (entry == nullptr) {
@@ -107,7 +106,19 @@ public:
         }
     }
 
+    void clear() {
+        for (unsigned long i = 0; i < table_size; i++) {
+            Hash_node<Key, Value> *entry = table[i];
+            while (entry != nullptr) {
+                Hash_node<Key, Value> *prev = entry;
+                entry = entry->get_next();
+                delete prev;
+            }
+            table[i] = nullptr;
+        }
+    }
     void load_from_file(const std::string &filename) {
+        clear();
         std::ifstream file(filename);
         if (!file.is_open()) {
             std::cerr << "Failed open file" << std::endl;
