@@ -2,13 +2,12 @@
 #include <string>
 #include <sstream>
 
-#include "Node.hpp"
 #include "Array.hpp"
 #include "List.hpp"
 #include "Queue.hpp"
 #include "Stack.hpp"
 #include "HashTable.hpp"
-//#include "AVL_tree.hpp"
+#include "CB_tree.hpp"
 
 using namespace std;
 
@@ -18,7 +17,7 @@ DoublyList<string> doubly_lists;
 Queue<string> queues;
 Stack<string> stacks;
 Hash_map<string, string, 1> hash_tables;
-//AVLTree<int> trees;
+CBTree tree;
 
 void process_query(const string& query) {
     stringstream ss(query);
@@ -305,41 +304,48 @@ void process_query(const string& query) {
     }
 
     // ----------TREE-------
-    // create_root(int data) // создание корня
-    // insert(tree_node<Data>* _node, int data) // вставка ключа data в дерево
-    // find(tree_node<Data>* _node, int data) // поиск узла с нужным значением
-    // remove(tree_node<Data>* _node, int data) // удаление узла с нужным значением
-    // printTree(tree_node<Data>* node) // вывод дерева на экран
-    /*else if (command == "TROOT"){
-        int root;
-        ss >> root;
-        trees.create_root(root);
-        trees.save_from_file("tree.txt");
-    }
+    // void insert(int digit)
+    // bool get_value(int value)
+    // void find_index(int index)
+    // bool is_CBT()
+    // void display()
     else if (command == "TINSERT"){
-        trees.load_from_file("tree.txt");
+        tree.load_from_file("tree.txt");
         int data;
         ss >> data;
-        trees.insert(trees.root, data);
-        trees.save_from_file("tree.txt");
+        tree.insert(data);
+        tree.save_from_file("tree.txt");
     }
     else if (command == "TSEARCH"){
+        tree.load_from_file("tree.txt");
         int data;
         ss >> data;
-        trees.find(trees.root, data);
+        if(tree.get_value(data)){
+            cout << "Value found" << endl;
+        }
+        else{
+            cout << "Value not found" << endl;
+        }
     }
-    else if (command == "TPOP"){
-        trees.load_from_file("tree.txt");
-        int data;
-        ss >> data;
-        trees.root = trees.remove(trees.root, data);
-        trees.save_from_file("tree.txt");
+    else if (command == "TGET"){
+        tree.load_from_file("tree.txt");
+        int index;
+        ss >> index;
+        tree.find_index(index);
+    }
+    else if (command == "T_CBT"){
+        tree.load_from_file("tree.txt");
+        if (tree.is_CBT()){
+            cout << "Tree is CBT" << endl;
+        }
+        else{
+            cout << "Tree is not CBT" << endl;
+        }
     }
     else if (command == "TPRINT"){
-        trees.load_from_file("tree.txt");
-        trees.display(trees.root);
+        tree.load_from_file("tree.txt");
+        tree.display();
     }
-    */
     else {
         cout << "Неизвестная команда " << endl;
     }

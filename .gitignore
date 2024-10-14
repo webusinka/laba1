@@ -19,3 +19,6 @@ queue.txt
 stack.txt
 hash_table.txt
 .gitignore
+AVL_tree.hpp
+tree.txt
+CB_tree.hpp.gch
